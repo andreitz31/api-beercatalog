@@ -12,7 +12,6 @@ import javax.persistence.Table;
 public class BeerDAO {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String name;
 	private String description;

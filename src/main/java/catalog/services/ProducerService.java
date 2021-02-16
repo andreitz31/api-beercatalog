@@ -10,7 +10,7 @@ public interface ProducerService {
 	public Producer updateProducer(Producer producer, Long id);
 	public Producer getProducer(Long id);
 	public List<Producer> getAllProducers();
-	public Producer deleteProducer(Long id);
+	public void deleteProducer(Long id);
 		
 	
 

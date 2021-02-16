@@ -62,8 +62,8 @@ public class BeerController {
 	@DeleteMapping("/deleteBeer/{id}")
 	@ApiOperation(value = "Delete beer", notes= "This method deletes the information of a beer")
 	public ResponseEntity<Beer> deleteBeer(@PathVariable Long id){
-		Beer beerResponse = beerService.deleteBeer(id);
-		ResponseEntity<Beer> response = ResponseEntity.accepted().body(beerResponse);
+		beerService.deleteBeer(id);
+		ResponseEntity<Beer> response = ResponseEntity.accepted().build();
 		return response;
 		
 	}

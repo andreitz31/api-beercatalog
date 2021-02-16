@@ -10,6 +10,6 @@ public interface BeerService {
 	public List<Beer> getAllBeers();
 	public Beer addBeer(Beer beer);
 	public Beer updateBeer(Beer beer,Long id);
-	public Beer deleteBeer(Long id);
+	public void deleteBeer(Long id);
 
 }

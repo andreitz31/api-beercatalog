@@ -11,7 +11,6 @@ import javax.persistence.Table;
 public class ProducerDAO {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
 	public Long getId() {

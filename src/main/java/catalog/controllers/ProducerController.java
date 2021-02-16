@@ -63,8 +63,8 @@ public class ProducerController {
 	@DeleteMapping("/deleteProducer/{id}")
 	@ApiOperation(value = "Delete beer manufacturer", notes= "This method deletes the information of a beer manufacturer")
 	public ResponseEntity<Producer> deleteProducer(@PathVariable Long id){
-		Producer ProducerResponse = producerService.deleteProducer(id);
-		ResponseEntity<Producer> response = ResponseEntity.accepted().body(ProducerResponse);
+		producerService.deleteProducer(id);
+		ResponseEntity<Producer> response = ResponseEntity.accepted().build();
 		return response;
 		
 	}
