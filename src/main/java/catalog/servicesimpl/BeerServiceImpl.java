@@ -4,19 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import catalog.adapters.BeerBeerDAOAdapter;
 import catalog.adapters.BeerDAOBeerAdapter;
 import catalog.crud.services.BeerCRUDService;
+import catalog.crud.services.ProducerCRUDService;
 import catalog.dao.BeerDAO;
+import catalog.dao.ProducerDAO;
 import catalog.services.BeerService;
 import models.Beer;
 
 @Service
 public class BeerServiceImpl implements BeerService {
 
+	@Autowired
+	ProducerCRUDService producerCrudService;
 	@Autowired
 	BeerCRUDService beerCrudService;
 	@Autowired
@@ -25,7 +31,14 @@ public class BeerServiceImpl implements BeerService {
 	BeerBeerDAOAdapter adapterToDAO;
 	@Override
 	public Beer getBeer(Long id) {
-		BeerDAO beerDao = beerCrudService.findById(id).get();
+		
+		BeerDAO beerDao;
+		try {
+			beerDao = beerCrudService.findById(id).get();
+		} catch (Exception e) {
+			beerDao = new BeerDAO();
+		}
+		
 		return this.adapter.adapt(beerDao);
 	}
 
@@ -39,9 +52,11 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	@Override
-	public Beer addBeer(Beer beer) {
+	public Beer addBeer(Beer beer)  {
 		
 		BeerDAO beerDao = adapterToDAO.adapt(beer);
+		Optional<ProducerDAO> producer = producerCrudService.findByName(beer.getProducer());
+		beerDao.setProducerId(producer.get().getId());
 		BeerDAO beerDAOResponse = beerCrudService.save(beerDao);
 		return adapter.adapt(beerDAOResponse);
 	}

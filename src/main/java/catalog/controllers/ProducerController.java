@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +29,28 @@ public class ProducerController {
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Get a beer manufacturer", notes= "This method gets the information of a beer manufacturer")
 	public ResponseEntity<Producer> getProducer(@PathVariable Long id) {
-		Producer Producer = producerService.getProducer(id);
-		ResponseEntity<Producer> response = ResponseEntity.accepted().body(Producer);
+		ResponseEntity<Producer> response;
+		try {
+			Producer Producer = producerService.getProducer(id);
+			response = ResponseEntity.accepted().body(Producer);
+		} catch (Exception e) {
+			System.out.println("ERROR LOG");
+			System.out.println(e.getMessage());
+			response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 		return response;
 	}
 	
 	@GetMapping("/")
 	@ApiOperation(value = "List beer manufacturer", notes= "This method list the information of all beer manufacturers")
 	public ResponseEntity<List<Producer>> listProducer(){
-		List<Producer> ProducerList = producerService.getAllProducers();
-		ResponseEntity<List<Producer>> response =  ResponseEntity.accepted().body(ProducerList);
+		ResponseEntity<List<Producer>> response;
+		try {
+			List<Producer> ProducerList = producerService.getAllProducers();
+			response = ResponseEntity.accepted().body(ProducerList);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -45,8 +58,13 @@ public class ProducerController {
 	@PostMapping("/addProducer")
 	@ApiOperation(value = "Add beer manufacturer", notes= "This method adds the information of a beer manufacturer")
 	public ResponseEntity<Producer> addProducer(@RequestBody Producer Producer){
-		Producer ProducerResponse = producerService.addProducer(Producer);
-		ResponseEntity<Producer> response = ResponseEntity.accepted().body(ProducerResponse);
+		ResponseEntity<Producer> response;
+		try {
+			Producer ProducerResponse = producerService.addProducer(Producer);
+			response = ResponseEntity.accepted().body(ProducerResponse);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -54,8 +72,13 @@ public class ProducerController {
 	@PutMapping("/updateProducer/{id}")
 	@ApiOperation(value = "Update beer manufacturer", notes= "This method updates the information of a beer manufacturer")
 	public ResponseEntity<Producer> updateProducer(@RequestBody Producer Producer, @PathVariable Long id){
-		Producer ProducerResponse = producerService.updateProducer(Producer,id);
-		ResponseEntity<Producer> response = ResponseEntity.accepted().body(ProducerResponse);
+		ResponseEntity<Producer> response;
+		try {
+			Producer ProducerResponse = producerService.updateProducer(Producer,id);
+			response = ResponseEntity.accepted().body(ProducerResponse);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -63,8 +86,13 @@ public class ProducerController {
 	@DeleteMapping("/deleteProducer/{id}")
 	@ApiOperation(value = "Delete beer manufacturer", notes= "This method deletes the information of a beer manufacturer")
 	public ResponseEntity<Producer> deleteProducer(@PathVariable Long id){
-		producerService.deleteProducer(id);
-		ResponseEntity<Producer> response = ResponseEntity.accepted().build();
+		ResponseEntity<Producer> response;
+		try {
+			producerService.deleteProducer(id);
+			response = ResponseEntity.accepted().build();
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
