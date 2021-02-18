@@ -27,16 +27,23 @@ public class BeerController {
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Get beer", notes= "This method gets the information of a beer")
 	public ResponseEntity<Beer> getBeer(@PathVariable Long id) {
-		Beer beer = beerService.getBeer(id);
-		ResponseEntity<Beer> response = ResponseEntity.accepted().body(beer);
+		ResponseEntity<Beer> response;
+			Beer beer = beerService.getBeer(id);
+			response = ResponseEntity.accepted().body(beer);
+
 		return response;
 	}
 	
 	@GetMapping("/")
 	@ApiOperation(value = "List beers", notes= "This method gets the information of all beers")
 	public ResponseEntity<List<Beer>> listBeer(){
-		List<Beer> beerList = beerService.getAllBeers();
-		ResponseEntity<List<Beer>> response =  ResponseEntity.accepted().body(beerList);
+		ResponseEntity<List<Beer>> response;
+		try {
+			List<Beer> beerList = beerService.getAllBeers();
+			response = ResponseEntity.accepted().body(beerList);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -44,8 +51,13 @@ public class BeerController {
 	@PostMapping("/addBeer")
 	@ApiOperation(value = "Add beer", notes= "This method adds the information of a beer")
 	public ResponseEntity<Beer> addBeer(@RequestBody Beer beer){
-		Beer beerResponse = beerService.addBeer(beer);
-		ResponseEntity<Beer> response = ResponseEntity.accepted().body(beerResponse);
+		ResponseEntity<Beer> response;
+		try {
+			Beer beerResponse = beerService.addBeer(beer);
+			response = ResponseEntity.accepted().body(beerResponse);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -53,8 +65,13 @@ public class BeerController {
 	@PutMapping("/updateBeer/{id}")
 	@ApiOperation(value = "Update beer", notes= "This method updates the information of a beer")
 	public ResponseEntity<Beer> updateBeer(@RequestBody Beer beer, @PathVariable Long id){
-		Beer beerResponse = beerService.updateBeer(beer,id);
-		ResponseEntity<Beer> response = ResponseEntity.accepted().body(beerResponse);
+		ResponseEntity<Beer> response;
+		try {
+			Beer beerResponse = beerService.updateBeer(beer,id);
+			response = ResponseEntity.accepted().body(beerResponse);
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}
@@ -62,8 +79,13 @@ public class BeerController {
 	@DeleteMapping("/deleteBeer/{id}")
 	@ApiOperation(value = "Delete beer", notes= "This method deletes the information of a beer")
 	public ResponseEntity<Beer> deleteBeer(@PathVariable Long id){
-		beerService.deleteBeer(id);
-		ResponseEntity<Beer> response = ResponseEntity.accepted().build();
+		ResponseEntity<Beer> response;
+		try {
+			beerService.deleteBeer(id);
+			response = ResponseEntity.accepted().build();
+		} catch (Exception e) {
+			response = ResponseEntity.badRequest().build();
+		}
 		return response;
 		
 	}

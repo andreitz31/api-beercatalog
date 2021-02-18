@@ -3,6 +3,8 @@ package catalog.crud.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +20,7 @@ public class BeerCRUDServiceImpl implements BeerCRUDService {
 
 
 	@Override
-	public List<BeerDAO> findAll() {
+	public List<BeerDAO> findAll(){
 		List<BeerDAO> beerList = (List<BeerDAO>)repository.findAll();
 		return beerList;
 
@@ -27,6 +29,7 @@ public class BeerCRUDServiceImpl implements BeerCRUDService {
 	@Override
 	public Optional<BeerDAO> findById(Long id) {
 		Optional<BeerDAO> beerDao = repository.findById(id);
+
 		return beerDao;
 	}
 

@@ -18,7 +18,7 @@ public class BeerDAO {
 	private String type;
 	private String graduation;
 	private String producer;
-	private String producerId;
+	private Long producerId;
 
 	
 	public String getDescription() {
@@ -53,11 +53,11 @@ public class BeerDAO {
 		this.producer = producer;
 	}
 
-	public String getProducerId() {
+	public Long getProducerId() {
 		return producerId;
 	}
 
-	public void setProducerId(String producerId) {
+	public void setProducerId(Long producerId) {
 		this.producerId = producerId;
 	}
 
