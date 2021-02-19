@@ -11,5 +11,6 @@ public interface BeerService {
 	public Beer addBeer(Beer beer);
 	public Beer updateBeer(Beer beer,Long id);
 	public void deleteBeer(Long id);
+	public List<Beer> getAllBeersSorted();
 
 }
