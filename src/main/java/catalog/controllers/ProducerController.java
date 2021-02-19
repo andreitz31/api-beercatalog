@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,8 +35,6 @@ public class ProducerController {
 			Producer Producer = producerService.getProducer(id);
 			response = ResponseEntity.accepted().body(Producer);
 		} catch (Exception e) {
-			System.out.println("ERROR LOG");
-			System.out.println(e.getMessage());
 			response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		return response;
@@ -55,6 +54,7 @@ public class ProducerController {
 		
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PostMapping("/addProducer")
 	@ApiOperation(value = "Add beer manufacturer", notes= "This method adds the information of a beer manufacturer")
 	public ResponseEntity<Producer> addProducer(@RequestBody Producer Producer){
@@ -69,6 +69,7 @@ public class ProducerController {
 		
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@PutMapping("/updateProducer/{id}")
 	@ApiOperation(value = "Update beer manufacturer", notes= "This method updates the information of a beer manufacturer")
 	public ResponseEntity<Producer> updateProducer(@RequestBody Producer Producer, @PathVariable Long id){
@@ -83,6 +84,7 @@ public class ProducerController {
 		
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/deleteProducer/{id}")
 	@ApiOperation(value = "Delete beer manufacturer", notes= "This method deletes the information of a beer manufacturer")
 	public ResponseEntity<Producer> deleteProducer(@PathVariable Long id){

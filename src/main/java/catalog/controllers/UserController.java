@@ -27,6 +27,7 @@ public class UserController {
 	@Autowired
 	UserService UserService;
 	
+	@Secured({"ROLE_ADMIN"})
 	@GetMapping("/{id}")
 	@ApiOperation(value = "Get User", notes= "This method gets the information of a User")
 	public ResponseEntity<User> getUser(@PathVariable Long id) {
@@ -62,6 +63,7 @@ public class UserController {
 		
 	}
 	
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/deleteUser/{id}")
 	@ApiOperation(value = "Delete User", notes= "This method deletes the information of a User")
 	public ResponseEntity<User> deleteUser(@PathVariable Long id){

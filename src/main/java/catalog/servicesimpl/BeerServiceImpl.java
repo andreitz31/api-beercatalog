@@ -1,6 +1,7 @@
 package catalog.servicesimpl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +49,18 @@ public class BeerServiceImpl implements BeerService {
 		List<BeerDAO> beerList = beerCrudService.findAll();
 		List<Beer> beers = new ArrayList<Beer>();
         beers = adapter.adaptList(beerList);
+		return beers;
+	}
+	
+	
+	@Override
+	public List<Beer> getAllBeersSorted() {
+		
+		List<BeerDAO> beerList = beerCrudService.findAll();
+		List<Beer> beers = new ArrayList<Beer>();
+        beers = adapter.adaptList(beerList);
+        
+        Collections.sort(beers);
 		return beers;
 	}
 
