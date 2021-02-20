@@ -56,7 +56,7 @@ public class ProducerServiceImpl implements ProducerService {
 	}
 
 	@Override
-	public void deleteProducer(Long id) {
+	public void deleteProducer(Long id)  {
 		
 		ProducerCrudService.delete(id);
 	}

@@ -10,6 +10,7 @@ public interface ProducerCRUDService {
 	
 	List<ProducerDAO> findAll();
 	Optional<ProducerDAO> findById(Long id);
+	Optional<ProducerDAO> findByName(String name);
 	ProducerDAO save(ProducerDAO beer);
 	void delete(Long id);
 

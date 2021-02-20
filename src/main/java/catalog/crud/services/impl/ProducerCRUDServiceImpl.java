@@ -3,6 +3,8 @@ package catalog.crud.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,25 +21,34 @@ public class ProducerCRUDServiceImpl implements ProducerCRUDService {
 	
 	@Override
 	public List<ProducerDAO> findAll() {
-		List<ProducerDAO> ProducerList = (List<ProducerDAO>)repository.findAll();
-		return ProducerList;
+		List<ProducerDAO> producerList = (List<ProducerDAO>)repository.findAll();
+		return producerList;
 
 	}
 
 	@Override
 	public Optional<ProducerDAO> findById(Long id) {
-		Optional<ProducerDAO> ProducerDao = repository.findById(id);
-		return ProducerDao;
+		Optional<ProducerDAO> producerDao = repository.findById(id);
+		if(!producerDao.isPresent()) {
+			throw  new EntityNotFoundException();
+		}
+		return producerDao;
 	}
 
 	@Override
 	public ProducerDAO save(ProducerDAO Producer) {
-		ProducerDAO ProducerDao = repository.save(Producer);
-		return ProducerDao;
+		ProducerDAO producerDao = repository.save(Producer);
+		return producerDao;
 	}
 	
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	@Override
+	public Optional<ProducerDAO> findByName(String name){
+		Optional<ProducerDAO> producerDao = repository.findByName(name);
+		return producerDao;
 	}
 
 }

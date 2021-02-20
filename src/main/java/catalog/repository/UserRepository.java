@@ -4,11 +4,12 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import catalog.dao.ProducerDAO;
+
+import catalog.dao.UserDAO;
 
 @Repository
-public interface ProducerRepository extends CrudRepository<ProducerDAO,Long> {
+public interface UserRepository extends CrudRepository<UserDAO,Long> {
 	
-	Optional<ProducerDAO> findByName(String name);
+	Optional<UserDAO> findByUsername(String name);
 
 }

@@ -1,7 +1,8 @@
 package models;
 
+import java.util.Comparator;
 
-public class Beer {
+public class Beer implements Comparable<Beer> {
 	
 	private Long id;
 	public Long getId() {
@@ -45,6 +46,11 @@ public class Beer {
 	private String description;
 	private String type;
 	private String producer;
+	
+	@Override
+	public int compareTo(Beer arg0) {
+		return this.getName().toLowerCase().compareTo(arg0.getName().toLowerCase());
+	}
 	
 
 }
