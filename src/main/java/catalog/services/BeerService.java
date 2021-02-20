@@ -12,5 +12,7 @@ public interface BeerService {
 	public Beer updateBeer(Beer beer,Long id);
 	public void deleteBeer(Long id);
 	public List<Beer> getAllBeersSorted();
+	public List<Beer> listByProducer(String producer);
+	public List<Beer> listByType(String type);
 
 }
