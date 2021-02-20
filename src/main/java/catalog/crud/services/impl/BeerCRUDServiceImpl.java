@@ -43,4 +43,16 @@ public class BeerCRUDServiceImpl implements BeerCRUDService {
 		repository.deleteById(id);
 	}
 
+	@Override
+	public List<BeerDAO> findByType(String type) {
+		
+		return repository.findByType(type);
+	}
+
+	@Override
+	public List<BeerDAO> findByProducer(String producer) {
+		
+		return repository.findByProducer(producer);
+	}
+
 }

@@ -11,5 +11,7 @@ import catalog.dao.BeerDAO;
 @Repository
 public interface BeerRepository extends CrudRepository<BeerDAO,Long> {
 	
+	List<BeerDAO> findByProducer(String producer);
+	List<BeerDAO> findByType(String type);
 
 }

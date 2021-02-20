@@ -89,4 +89,20 @@ public class BeerServiceImpl implements BeerService {
 		beerCrudService.delete(id);
 	}
 
+	@Override
+	public List<Beer> listByProducer(String producer) {
+		List<BeerDAO> beerList = beerCrudService.findByProducer(producer);
+		List<Beer> beers = new ArrayList<Beer>();
+        beers = adapter.adaptList(beerList);
+		return beers;
+	}
+
+	@Override
+	public List<Beer> listByType(String type) {
+		List<BeerDAO> beerList = beerCrudService.findByType(type);
+		List<Beer> beers = new ArrayList<Beer>();
+        beers = adapter.adaptList(beerList);
+		return beers;
+	}
+
 }

@@ -65,6 +65,34 @@ public class BeerController {
 		
 	}
 	
+	@GetMapping("/byType/{type}")
+	@ApiOperation(value = "List beers by type", notes= "This method gets the information of all beers of one type")
+	public ResponseEntity<List<Beer>> listBeerByType(@PathVariable String type){
+		ResponseEntity<List<Beer>> response;
+		try {
+			List<Beer> beerList = beerService.listByType(type);
+			response = ResponseEntity.accepted().body(beerList);
+		} catch (Exception e) {
+			response =  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return response;
+		
+	}
+	
+	@GetMapping("/byProducer/{producer}")
+	@ApiOperation(value = "List beers by producer", notes= "This method gets the information of all beers of one producer")
+	public ResponseEntity<List<Beer>> listBeerByProducer(@PathVariable String producer){
+		ResponseEntity<List<Beer>> response;
+		try {
+			List<Beer> beerList = beerService.listByProducer(producer);
+			response = ResponseEntity.accepted().body(beerList);
+		} catch (Exception e) {
+			response =  ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return response;
+		
+	}
+	
 	@Secured({"ROLE_ADMIN", "ROLE_PRODUCER"})
 	@PostMapping("/addBeer")
 	@ApiOperation(value = "Add beer", notes= "This method adds the information of a beer")
