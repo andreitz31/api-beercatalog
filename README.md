@@ -4,9 +4,17 @@ A catalog where different producers can add their beers
 
 ## Features 
 
- Users CRUD - Creating / updating / getting / deleting / listing users ( ROLE_ADMIN needed )
- Producers CRUD - Creating / updating / deleting ( ROLE_ADMIN needed ) and the retrieval of information is for general use 
- Beers CRUD - Creating/updating ( ROLE_PRODUCER needed ). Each producer can add and update only his beers 
+ ### Users CRUD
+ Creating / updating / getting / deleting / listing users ( ROLE_ADMIN needed ). If the user is a producer, the name of the user should be equal with the name of the producer. 
+ 
+ 
+ ### Producers CRUD
+ Creating / updating / deleting ( ROLE_ADMIN needed ) and the retrieval of information is for general use 
+ 
+ 
+ ### Beers CRUD 
+ Creating/updating ( ROLE_PRODUCER needed ). Each producer can add and update only his beers. Endpoint the lists beer sorted alphabetically.
+ Endpoints for listing beers by type and by producer. 
  
 ## Installation 
 
