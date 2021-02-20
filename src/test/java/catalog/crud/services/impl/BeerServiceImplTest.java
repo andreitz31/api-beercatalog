@@ -17,28 +17,28 @@ public class BeerServiceImplTest {
 	
 	BeerCRUDServiceImpl beerService = new BeerCRUDServiceImpl();
 	
-	@Test
-	@Rollback(false)
-	public void testCreateProduct() {
-		
-	    BeerDAO savedBeer = new BeerDAO();
-	    
-	    savedBeer.setId(100L);
-	    savedBeer.setName("TESTBEER");
-	    savedBeer.setDescription("desc");
-	    savedBeer.setGraduation("1%");
-	    savedBeer.setProducer("Grolsch");
-	    savedBeer.setProducerId(1L);
-	    savedBeer.setType("TYPE");
-	    
-	    beerService.save(savedBeer);
-	    
-	    BeerDAO beerDAO = beerService.findById(100L).get();
-	    
-	    assertEquals(beerDAO.getId(),100L);
-
-	    
-	   
-	}
+//	@Test
+//	@Rollback(false)
+//	public void testCreateProduct() {
+//		
+//	    BeerDAO savedBeer = new BeerDAO();
+//	    
+//	    savedBeer.setId(100L);
+//	    savedBeer.setName("TESTBEER");
+//	    savedBeer.setDescription("desc");
+//	    savedBeer.setGraduation("1%");
+//	    savedBeer.setProducer("Grolsch");
+//	    savedBeer.setProducerId(1L);
+//	    savedBeer.setType("TYPE");
+//	    
+//	    beerService.save(savedBeer);
+//	    
+//	    BeerDAO beerDAO = beerService.findById(100L).get();
+//	    
+//	    assertEquals(beerDAO.getId(),100L);
+//
+//	    
+//	   
+//	}
 
 }
